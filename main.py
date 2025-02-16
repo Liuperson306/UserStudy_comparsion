@@ -7,6 +7,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 import poplib
 from email.parser import Parser
+import random
 
 @st.cache_data
 def send_email(email, password, array):
@@ -187,7 +188,7 @@ def QA(human_likeness, smoothness, semantic_accuracy, num, method_num):
 
     # 检查是否有评分为None
     if None in human_likeness[number+1:number+6] or None in smoothness[number+1:number+6] or None in semantic_accuracy[number+1:number+6]:
-        return False
+        return True
     
     return True  
     
@@ -196,7 +197,12 @@ def play_video(file_name):
     video_bytes = open(file_name, 'rb').read()
     return video_bytes
 
-def page(video_num, method_num):
+@st.cache_data
+def gen_random():
+    # 0或1随机数
+    return random.randint(0, 1)
+    
+def page(video_num, method_num, random_num):
     instrunction()
     file = open(r"filenames.txt", "r", encoding='utf-8') 
     file_list = file.readlines()
@@ -216,9 +222,8 @@ def page(video_num, method_num):
     num = st.session_state["page_num"]
 
     st.subheader(fr"Video {num} / {video_num}")
-    #st.write(file_list[num-1].rstrip())
-    video_bytes = play_video(file_list[num-1].rstrip())
-    #video_bytes = play_video(r"E:\UserStudy\Comparsion\2_scott_0_1_1.mp4")
+    st.markdown(file_list[(num-1)*2+random_num].rstrip())
+    video_bytes = play_video(file_list[(num-1)*2+random_num].rstrip())
     st.video(video_bytes)
 
     st.write("视频从左到右，依次对应第一、第二、第三人、第四人、第五人。")
@@ -303,4 +308,5 @@ if __name__ == '__main__':
             smoothness = st.session_state["smoothness"]
             semantic_accuracy = st.session_state["semantic_accuracy"]
 
-        page(video_num, method_num)
+        random_num = gen_random()
+        page(video_num, method_num, random_num)
