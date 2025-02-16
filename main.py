@@ -222,7 +222,7 @@ def page(video_num, method_num, random_num):
     num = st.session_state["page_num"]
 
     st.subheader(fr"Video {num} / {video_num}")
-    st.markdown(file_list[(num-1)*2+random_num].rstrip())
+    #st.markdown(file_list[(num-1)*2+random_num].rstrip())
     video_bytes = play_video(file_list[(num-1)*2+random_num].rstrip())
     st.video(video_bytes)
 
