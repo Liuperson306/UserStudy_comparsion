@@ -166,6 +166,7 @@ def instrunction():
     st.markdown('''##### 3. 手势语义准确度评分''')
     st.markdown('''观察虚拟角色的手势是否有效地传达其意图。判断这些手势是否有助于增强视频中的语音内容，是否能够更清晰地传递视频中表达的意思。''')
     st.markdown('''###### 注意事项：本实验专注于手势动作，不需要关注面部表情。''')
+    st.markdown('''###### 手机端用户可以在手机横屏状态下答题，如遇卡顿和视频播放不了的情况，建议在电脑端答题。''')
 
 def QA(human_likeness, smoothness, semantic_accuracy, num, method_num):
     number = (num-1) * method_num - 1
