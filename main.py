@@ -233,7 +233,7 @@ def page(video_num, method_num, random_num):
     st.markdown(f"视频中音频对应的文本：{text_list[(num-1)*2+random_num].rstrip()}")
 
     st.divider()
-    st.write("视频从左到右，依次对应第一、第二、第三人、第四人、第五人。")
+    st.write("视频从左到右，依次对应第1个人、第2个人、第3个人、第4个人、第5个人。")
     st.markdown("请对视频的人物评分:star:，1星为最差，5星为最好。")
     res = QA(human_likeness, smoothness, semantic_accuracy, num, method_num)
 
