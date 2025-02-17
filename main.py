@@ -166,7 +166,6 @@ def instrunction():
     st.markdown('''##### 3. 手势语义准确度评分''')
     st.markdown('''观察虚拟角色的手势是否有效地传达其意图。判断这些手势是否有助于增强视频中的语音内容，是否能够更清晰地传递视频中表达的意思。''')
     st.markdown('''###### 注意事项：本实验专注于手势动作，不需要关注面部表情。''')
-    st.markdown('''###### 建议手机端用户在手机横屏状态下答题，如遇视频播放不了或卡顿的情况，推荐在电脑端答题。''')
 
 def QA(human_likeness, smoothness, semantic_accuracy, num, method_num):
     number = (num-1) * method_num - 1
@@ -209,6 +208,10 @@ def page(video_num, method_num, random_num):
     file_list = file.readlines()
     file.close()
 
+    text = open(r"text.txt", "r", encoding='utf-8') 
+    text_list = text.readlines()
+    text.close()
+
     def switch_page(page_num):
         st.session_state["page_num"] = page_num
         st.session_state["human_likeness"] = human_likeness 
@@ -227,6 +230,9 @@ def page(video_num, method_num, random_num):
     video_bytes = play_video(file_list[(num-1)*2+random_num].rstrip())
     st.video(video_bytes)
 
+    st.markdown(f"视频中音频对应的文本：{text_list[(num-1)*2+random_num].rstrip()}")
+
+    st.divider()
     st.write("视频从左到右，依次对应第一、第二、第三人、第四人、第五人。")
     st.markdown("请对视频的人物评分:star:，1星为最差，5星为最好。")
     res = QA(human_likeness, smoothness, semantic_accuracy, num, method_num)
@@ -289,7 +295,7 @@ if __name__ == '__main__':
     #st.cache_data.clear() # 初始化
     myemail = st.secrets["my_email"]["email"]  
     password = st.secrets["my_email"]["password"]
-    video_num = 10
+    video_num = 8
     method_num = 5
     dataset = "comparsion"
 
