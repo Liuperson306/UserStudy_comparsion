@@ -189,7 +189,7 @@ def QA(human_likeness, smoothness, semantic_accuracy, num, method_num):
 
     # 检查是否有评分为None
     if None in human_likeness[number+1:number+6] or None in smoothness[number+1:number+6] or None in semantic_accuracy[number+1:number+6]:
-        return True
+        return False
     
     return True  
     
